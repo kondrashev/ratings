@@ -33,7 +33,7 @@ export const loadStudentsFetchData = (data) => async (dispatch) => {
     } else {
       dispatch(loadStudentsFetchDataSuccess(response));
     }
-    setValues({ ...values });
+    setValues({ ...values, nameStudent: "" });
   } else {
     setValues({
       ...values,

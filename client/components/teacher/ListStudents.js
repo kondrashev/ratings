@@ -218,7 +218,9 @@ const ListStudents = (props) => {
             variant="h6"
             id="tableTitle"
             component="div">
-            {values.typeUser === "USER" ? values.titleNameGroup : "Студенти"}
+            {values.typeUser === "USER"
+              ? String(values.titleNameGroup).toUpperCase()
+              : "Студенти"}
           </Typography>
         )}
         {numSelected > 0 && values.typeUser === "ADMIN" ? (
