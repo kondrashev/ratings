@@ -7,10 +7,10 @@
     "node": "16.15.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
+    "prod": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "client": "webpack --watch -d --output ./static/built/bundle.js",
-    "all": "concurrently \"npm run server\" \"npm run client\""
+    "all": "concurrently \"npm run dev\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "@mui/styles": "^5.0.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "csvtojson": "^2.0.10",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
