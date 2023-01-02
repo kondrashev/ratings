@@ -98,8 +98,7 @@ export default function MainMenu() {
         horizontal: "right",
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
+      onClose={handleMenuClose}>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
@@ -119,8 +118,7 @@ export default function MainMenu() {
         horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
+      onClose={handleMobileMenuClose}>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
@@ -133,8 +131,7 @@ export default function MainMenu() {
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
-          color="inherit"
-        >
+          color="inherit">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -147,8 +144,7 @@ export default function MainMenu() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
-        >
+          color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -201,8 +197,7 @@ export default function MainMenu() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
+            sx={{ display: { xs: "none", sm: "block" } }}>
             {values.login}
           </Typography>
           {values.typeUser === "ADMIN" && (
@@ -221,6 +216,12 @@ export default function MainMenu() {
               value={values.nameStudent}
               onChange={changeNameStudent}
               onKeyPress={itemSearch}
+              onClick={() => {
+                setValues({
+                  ...values,
+                  nameStudent: "",
+                });
+              }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
@@ -228,8 +229,7 @@ export default function MainMenu() {
             <IconButton
               size="large"
               aria-label="show 4 new mails"
-              color="inherit"
-            >
+              color="inherit">
               <Badge
                 color="error"
                 sx={{
@@ -238,8 +238,7 @@ export default function MainMenu() {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                }}
-              >
+                }}>
                 <IconHome />
               </Badge>
             </IconButton>
@@ -251,8 +250,7 @@ export default function MainMenu() {
                 aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
+                color="inherit">
                 <AccountCircle />
               </IconButton>
             )}
@@ -263,16 +261,14 @@ export default function MainMenu() {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-              }}
-            >
+              }}>
               <IconButton
                 size="large"
                 aria-label="show more"
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
+                color="inherit">
                 <MoreIcon />
               </IconButton>
             </Box>
