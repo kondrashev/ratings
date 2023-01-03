@@ -154,7 +154,7 @@ export default function MainMenu() {
   const changeNameStudent = (event) => {
     setValues({
       ...values,
-      nameStudent: event.target.value,
+      nameStudent: event.target.value.toUpperCase(),
     });
   };
   const itemSearch = (event) => {
