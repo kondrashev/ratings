@@ -83,9 +83,7 @@ const ListStudents = (props) => {
             ? `${endpoints.searchStudent}?surName=${String(values.nameStudent)
                 .substring(0, 1)
                 .toUpperCase()}${String(values.nameStudent).substring(1)}`
-            : `${endpoints.getSearchGroup}?nameGroup=${String(
-                values.nameStudent
-              ).toUpperCase()}`,
+            : `${endpoints.getSearchGroup}?nameGroup=${values.nameStudent}`,
         values,
         setValues,
       };
