@@ -39,7 +39,7 @@ export const addDatesFetchData = (data) => async (dispatch) => {
 };
 
 export const loadListDatesFetchData = (data) => async (dispatch) => {
-  const { url, values, setValues } = data;
+  const { url } = data;
   let response = await fetch(url, {
     headers: {
       Authorization: localStorage.token,
@@ -47,7 +47,6 @@ export const loadListDatesFetchData = (data) => async (dispatch) => {
   });
   if (response.status === 200) {
     response = await response.json();
-    // dispatch(updateDatesFetchDataSuccess(response));
     dispatch(loadDatesFetchDataSuccess(response));
   } else {
     console.log({ message: "Error!!!" });
