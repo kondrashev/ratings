@@ -28,7 +28,7 @@ const getExam = (rating, report) => {
     return "Н/З";
   }
 };
-const informationUpload = (data, discipline, group) => {
+const informationUpload = (data, group) => {
   //Getting all keys and values
   let keys = data.map((item) => {
     return Object.keys(item)[0].split(";");
@@ -37,118 +37,102 @@ const informationUpload = (data, discipline, group) => {
     return Object.values(item)[0].split(";");
   });
   //Getting the necessary keys and values
-  let newKeys =
-    discipline === "ТКМ"
-      ? keys.map(
-          ([
-            ,
-            surName,
-            ,
-            groupName,
-            ,
-            ,
-            ,
-            k1,
-            k2,
-            k3,
-            k4,
-            k5,
-            k6,
-            k7,
-            k8,
-            k9,
-            k10,
-            k11,
-            k12,
-            k13,
-            k14,
-            k15,
-            k16,
-          ]) => {
-            return [
-              surName,
-              groupName,
-              k1,
-              k2,
-              k3,
-              k4,
-              k5,
-              k6,
-              k7,
-              k8,
-              k9,
-              k10,
-              k11,
-              k12,
-              k13,
-              k14,
-              k15,
-              k16,
-            ];
-          }
-        )
-      : discipline === "Матеріалознавство"
-      ? keys.map(([, surName, , groupName, , , k1, k2, k3, k4, k5, k6, k7]) => {
-          return [surName, groupName, k1, k2, k3, k4, k5, k6, k7];
-        })
-      : [];
-  let newValues =
-    discipline === "ТКМ"
-      ? values.map(
-          ([
-            ,
-            surName,
-            ,
-            groupName,
-            ,
-            ,
-            ,
-            v1,
-            v2,
-            v3,
-            v4,
-            v5,
-            v6,
-            v7,
-            v8,
-            v9,
-            v10,
-            v11,
-            v12,
-            v13,
-            v14,
-            v15,
-            v16,
-          ]) => {
-            return [
-              surName,
-              groupName,
-              v1,
-              v2,
-              v3,
-              v4,
-              v5,
-              v6,
-              v7,
-              v8,
-              v9,
-              v10,
-              v11,
-              v12,
-              v13,
-              v14,
-              v15,
-              v16,
-            ];
-          }
-        )
-      : discipline === "Матеріалознавство"
-      ? values.map(
-          ([, surName, , groupName, , , v1, v2, v3, v4, v5, v6, v7]) => {
-            return [surName, groupName, v1, v2, v3, v4, v5, v6, v7];
-          }
-        )
-      : [];
+  let newKeys = keys.map(
+    ([
+      ,
+      surName,
+      ,
+      groupName,
+      ,
+      ,
+      ,
+      k1,
+      k2,
+      k3,
+      k4,
+      k5,
+      k6,
+      k7,
+      k8,
+      k9,
+      k10,
+      k11,
+      k12,
+      k13,
+      k14,
+      k15,
+      k16,
+    ]) => {
+      return [
+        surName,
+        groupName,
+        k1,
+        k2,
+        k3,
+        k4,
+        k5,
+        k6,
+        k7,
+        k8,
+        k9,
+        k10,
+        k11,
+        k12,
+        k13,
+        k14,
+        k15,
+        k16,
+      ];
+    }
+  );
+  let newValues = values.map(
+    ([
+      ,
+      surName,
+      ,
+      groupName,
+      ,
+      ,
+      ,
+      v1,
+      v2,
+      v3,
+      v4,
+      v5,
+      v6,
+      v7,
+      v8,
+      v9,
+      v10,
+      v11,
+      v12,
+      v13,
+      v14,
+      v15,
+      v16,
+    ]) => {
+      return [
+        surName,
+        groupName,
+        v1,
+        v2,
+        v3,
+        v4,
+        v5,
+        v6,
+        v7,
+        v8,
+        v9,
+        v10,
+        v11,
+        v12,
+        v13,
+        v14,
+        v15,
+        v16,
+      ];
+    }
+  );
   //Keys and values are without surName and groupName
   keys = newKeys.map(([, , ...item]) => item);
   values = newValues.map(([, , ...item]) => item);
