@@ -61,7 +61,7 @@ class DisciplineController {
       const fileName = "data.csv";
       csvFile.mv(path.resolve(__dirname, "..", "static/csv", fileName));
       let data = await csv().fromFile("static/csv/data.csv");
-      data = informationUpload(data, getDiscipline.name, getGroup.name);
+      data = informationUpload(data, getGroup.name);
       data.forEach(async (item) => {
         const student = await Student.findOne({
           where: {
