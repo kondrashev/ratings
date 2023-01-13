@@ -90,12 +90,6 @@ const ListStudents = (props) => {
       dispatch(loadStudentsFetchData(data));
     }
   }, [values.isActiveSearchStudent, updateStudent, values.update]);
-  const { moodle } =
-    useSelector((state) =>
-      state.itemReducer.groups.find(
-        (group) => group.id === suffixGroupURL.current
-      )
-    ) || 0;
   const rows = listStudents.map((item) => {
     return createData(item);
   });
@@ -148,7 +142,11 @@ const ListStudents = (props) => {
               inputProps={{
                 "aria-label": "select all desserts",
               }}
-              disabled={values.typeUser === "USER" || moodle ? true : false}
+              disabled={
+                values.typeUser === "USER" || listStudents[0]?.options
+                  ? true
+                  : false
+              }
             />
           </TableCell>
           {headCells(listDates).map((headCell) => (
@@ -262,7 +260,7 @@ const ListStudents = (props) => {
     setSelected([]);
   };
   const handleClick = (event, id) => {
-    if (values.typeUser === "ADMIN" && !moodle) {
+    if (values.typeUser === "ADMIN" && !listStudents[0]?.options) {
       const selectedIndex = selected.indexOf(id);
       let newSelected = [];
       if (selectedIndex === -1) {
@@ -346,7 +344,10 @@ const ListStudents = (props) => {
                             "aria-labelledby": labelId,
                           }}
                           disabled={
-                            values.typeUser === "USER" || moodle ? true : false
+                            values.typeUser === "USER" ||
+                            listStudents[0]?.options
+                              ? true
+                              : false
                           }
                         />
                       </TableCell>
