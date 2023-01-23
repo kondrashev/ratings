@@ -37,4 +37,5 @@ export const context = {
   titleNameGroup: "",
   update: false,
   uploadFile: false,
+  isShowColumns: true,
 };

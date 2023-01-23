@@ -149,22 +149,49 @@ const ListStudents = (props) => {
               }
             />
           </TableCell>
-          {headCells(listDates).map((headCell) => (
-            <TableCell
-              key={headCell.id}
-              align={headCell.numeric ? "right" : "left"}
-              padding={headCell.disablePadding ? "none" : "normal"}
-              sortDirection={orderBy === headCell.id ? order : false}>
-              <TableSortLabel
-                direction={orderBy === headCell.id ? order : "asc"}
-                onClick={createSortHandler(headCell.id)}>
-                {headCell.label}
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              </TableSortLabel>
-            </TableCell>
-          ))}
+          {headCells(listDates).map((headCell) => {
+            if (!values.isShowColumns) {
+              if (!headCell.id.includes("test")) {
+                return (
+                  <TableCell
+                    key={headCell.id}
+                    align={headCell.numeric ? "right" : "left"}
+                    padding={headCell.disablePadding ? "none" : "normal"}
+                    sortDirection={orderBy === headCell.id ? order : false}>
+                    <TableSortLabel
+                      direction={orderBy === headCell.id ? order : "asc"}
+                      onClick={createSortHandler(headCell.id)}>
+                      {headCell.label}
+                      <Box component="span" sx={visuallyHidden}>
+                        {order === "desc"
+                          ? "sorted descending"
+                          : "sorted ascending"}
+                      </Box>
+                    </TableSortLabel>
+                  </TableCell>
+                );
+              }
+            } else {
+              return (
+                <TableCell
+                  key={headCell.id}
+                  align={headCell.numeric ? "right" : "left"}
+                  padding={headCell.disablePadding ? "none" : "normal"}
+                  sortDirection={orderBy === headCell.id ? order : false}>
+                  <TableSortLabel
+                    direction={orderBy === headCell.id ? order : "asc"}
+                    onClick={createSortHandler(headCell.id)}>
+                    {headCell.label}
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === "desc"
+                        ? "sorted descending"
+                        : "sorted ascending"}
+                    </Box>
+                  </TableSortLabel>
+                </TableCell>
+              );
+            }
+          })}
         </TableRow>
       </TableHead>
     );
@@ -352,15 +379,29 @@ const ListStudents = (props) => {
                         />
                       </TableCell>
                       {headCells(listDates).map(({ id }) => {
-                        return (
-                          <EditItemInput
-                            key={id}
-                            row={row}
-                            id={id}
-                            editItem={editItem}
-                            surName={listStudents[0]?.options}
-                          />
-                        );
+                        if (!values.isShowColumns) {
+                          if (!id.includes("test")) {
+                            return (
+                              <EditItemInput
+                                key={id}
+                                row={row}
+                                id={id}
+                                editItem={editItem}
+                                surName={listStudents[0]?.options}
+                              />
+                            );
+                          }
+                        } else {
+                          return (
+                            <EditItemInput
+                              key={id}
+                              row={row}
+                              id={id}
+                              editItem={editItem}
+                              surName={listStudents[0]?.options}
+                            />
+                          );
+                        }
                       })}
                     </TableRow>
                   );

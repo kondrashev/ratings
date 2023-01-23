@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -20,6 +21,7 @@ import { ApplictationContext } from "../../App";
 import IconHome from "./IconHome";
 import Avatar from "@mui/material/Avatar";
 import OpenMenu from "./OpenMenu";
+import { useSelector } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -70,6 +72,12 @@ export default function MainMenu() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const listStudents =
+    values.isShowSearchStudent && values.typeUser === "ADMIN"
+      ? useSelector((state) => state.studentReducer.search).filter(
+          (_, index) => index === 5
+        )
+      : useSelector((state) => state.studentReducer.students);
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -192,6 +200,12 @@ export default function MainMenu() {
       }
     }
   };
+  const showColumns = () => {
+    setValues({
+      ...values,
+      isShowColumns: !values.isShowColumns,
+    });
+  };
   return (
     <Box>
       <AppBar className={classes.globalStyle}>
@@ -229,6 +243,26 @@ export default function MainMenu() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box>
+            {values.typeUser === "ADMIN" && (
+              <Button
+                disabled={
+                  values.showListStudents && listStudents[0]?.options
+                    ? false
+                    : true
+                }
+                onClick={showColumns}
+                sx={{
+                  width: "auto",
+                  height: "30px",
+                  color: "#fff",
+                  background: "#5689D3",
+                  "&:hover": {
+                    background: "grey",
+                  },
+                }}>
+                {values.isShowColumns ? "HIDE COLUMNS" : "SHOW COLUMNS"}
+              </Button>
+            )}
             <IconButton
               size="large"
               aria-label="show 4 new mails"
