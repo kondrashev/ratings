@@ -32,10 +32,12 @@ const Student = () => {
       )}
       {values.errorForm && (
         <Alert
-          onClose={() => {
-            setValues({ ...values, errorForm: false, errorMessage: "" });
+          sx={{
+            marginTop: `${values.errorMessage ? 100 : 0}px`,
           }}
-        >
+          onClose={() => {
+            setValues({ ...values, errorMessage: "" });
+          }}>
           {values.errorMessage}
         </Alert>
       )}

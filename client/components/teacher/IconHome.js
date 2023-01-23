@@ -23,6 +23,7 @@ export default function IconHome() {
       showNavigationItemDiscipline: false,
       showNavigationItemGroup: false,
       showNavigationItemStudent: false,
+      errorForm: false,
     });
     history.push("/");
   };
