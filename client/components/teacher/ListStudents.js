@@ -331,7 +331,11 @@ const ListStudents = (props) => {
     }
   };
   return (
-    <Box sx={{ width: "100%", zIndex: !values.showFormItem && 1000 }}>
+    <Box
+      sx={{
+        width: "100%",
+        zIndex: !values.showFormItem && 1000,
+      }}>
       <Paper
         sx={{ width: "100%", mt: values.typeUser === "USER" ? 6 : 0, mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />

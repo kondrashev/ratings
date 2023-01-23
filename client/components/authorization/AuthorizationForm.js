@@ -106,8 +106,7 @@ const AuthorizationForm = () => {
                 aria-label="toggle password visibility"
                 onClick={handleClickShowPassword}
                 onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
+                edge="end">
                 {values.showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>
@@ -121,8 +120,7 @@ const AuthorizationForm = () => {
         disableElevation
         style={styles.fields}
         onClick={authorization}
-        disabled={values.errorForm ? true : false}
-      >
+        disabled={values.errorForm ? true : false}>
         Authorization
       </Button>
       {values.errorForm && (
@@ -133,8 +131,7 @@ const AuthorizationForm = () => {
               errorForm: false,
               errorMessage: "",
             });
-          }}
-        >
+          }}>
           {values.errorMessage}
         </Alert>
       )}
