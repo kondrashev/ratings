@@ -131,9 +131,21 @@ const informationUpload = (data, group) => {
       ];
     }
   );
-  //Keys and values are without surName and groupName
-  keys = newKeys.map(([, , ...item]) => item);
-  values = newValues.map(([, , ...item]) => item);
+  if (newKeys[0].length < 19) {
+    keys = newKeys.map(([, , ...item]) =>
+      item.filter((item) => item !== undefined).slice(0, 9)
+    );
+    values = newValues.map(([, , ...item]) =>
+      item.filter((item) => item !== undefined).slice(0, 9)
+    );
+  } else {
+    keys = newKeys.map(([, , ...item]) =>
+      item.filter((item) => item !== undefined)
+    );
+    values = newValues.map(([, , ...item]) =>
+      item.filter((item) => item !== undefined)
+    );
+  }
   //Forming numbers of tests
   const numberTests = keys[0].map((item) => {
     let box = item.split("_");
