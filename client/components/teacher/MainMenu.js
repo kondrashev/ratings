@@ -224,7 +224,9 @@ export default function MainMenu() {
           )}
           {values.typeUser === "ADMIN" && <OpenMenu />}
           <Search>
-            <SearchIconWrapper>{/* <SearchIcon /> */}</SearchIconWrapper>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
