@@ -66,6 +66,7 @@ const useStyles = makeStyles({
   avatar: { marginLeft: "50px", marginRight: "20px" },
 });
 export default function MainMenu() {
+  console.log("Test");
   const classes = useStyles();
   const { values, setValues } = useContext(ApplictationContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
