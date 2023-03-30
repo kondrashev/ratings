@@ -3,13 +3,18 @@ name: Deploy React Application
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - ".github/**"
+    # paths-ignore:
+    #   - ".github/**"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.15.0]
     steps:
       - uses: actions/checkout@v3
-      - name: Deploy to heroku
-        run: echo Deploy was finished!!!
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
