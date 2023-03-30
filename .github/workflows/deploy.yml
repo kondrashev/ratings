@@ -24,5 +24,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install modules
         run: npm install
-      - name: build
+      # - name: build
       #   run: npm run client
