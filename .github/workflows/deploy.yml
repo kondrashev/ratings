@@ -7,11 +7,9 @@ on:
       - ".github/**"
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install dependecies
-        run: npm install concurrently@6.3.0
-      - name: Create build
-        run: npm run all
+      - name: Deploy to heroku
+        run: git push heroku main
