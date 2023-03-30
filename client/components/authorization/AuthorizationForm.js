@@ -121,7 +121,7 @@ const AuthorizationForm = () => {
         style={styles.fields}
         onClick={authorization}
         disabled={values.errorForm ? true : false}>
-        Authorizations
+        Authorization
       </Button>
       {values.errorForm && (
         <Alert
