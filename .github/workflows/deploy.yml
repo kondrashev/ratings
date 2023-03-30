@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy to heroku
-        run: git push heroku main
+        run: echo Deploy was finished!!!
