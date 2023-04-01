@@ -10,7 +10,8 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "client": "webpack --watch -d --output ./static/built/bundle.js",
-    "all": "concurrently \"npm run dev\" \"npm run client\""
+    "all": "concurrently \"npm run dev\" \"npm run client\"",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
