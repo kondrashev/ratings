@@ -16,26 +16,8 @@ import { useHistory } from "react-router-dom";
 import { checkUserFetchData } from "../../store/authorization/action";
 import endpoints from "../constants/Endpoints";
 import Alert from "@mui/material/Alert";
+import "@styles/AuthorizationForm.scss";
 
-const styles = {
-  formAuthorization: {
-    width: "400px",
-    height: "350px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignItems: "center",
-    background: "#F1F3F4",
-    borderRadius: "10px",
-    position: "absolute",
-    left: "50%",
-    transform: "translate(-50%, 30%)",
-  },
-  fields: {
-    width: "360px",
-    height: "50px",
-  },
-};
 const AuthorizationForm = () => {
   const history = useHistory();
   const { values, setValues } = useContext(ApplictationContext);
@@ -82,13 +64,14 @@ const AuthorizationForm = () => {
     }
   }, [values.typeUser]);
   return (
-    <Box sx={styles.formAuthorization}>
+    // <Box sx={styles.formAuthorization}>
+    <Box className="formAuthorization">
       <TextField
         id="outlined-search"
         disabled={values.errorForm}
         label="Login"
         variant="outlined"
-        style={styles.fields}
+        className="fields"
         onChange={handleChangeLogin}
       />
       <FormControl>
@@ -98,7 +81,7 @@ const AuthorizationForm = () => {
           disabled={values.errorForm}
           type={values.showPassword ? "text" : "password"}
           onChange={handleChangePassword}
-          style={styles.fields}
+          className="fields"
           onKeyPress={onPressKey}
           endAdornment={
             <InputAdornment position="end">
@@ -118,10 +101,10 @@ const AuthorizationForm = () => {
         variant="contained"
         color="primary"
         disableElevation
-        style={styles.fields}
+        className="fields"
         onClick={authorization}
         disabled={values.errorForm ? true : false}>
-        Authorization
+        <t class="container">Authorization</t>
       </Button>
       {values.errorForm && (
         <Alert

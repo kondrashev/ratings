@@ -11,6 +11,11 @@ module.exports = {
     path: __dirname,
     filename: "./static/built/bundle.js",
   },
+  resolve: {
+    alias: {
+      "@styles": path.resolve(__dirname, "client/styles"),
+    },
+  },
   module: {
     rules: [
       {
@@ -26,7 +31,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(css|sass)$/,
+        test: /\.s[ac]ss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
