@@ -9,7 +9,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "client": "webpack --watch -d --output ./static/built/bundle.js",
+    "client": "webpack --watch -d --output ./static/bundle.js",
     "all": "concurrently \"npm run dev\" \"npm run client\"",
     "build": "webpack"
   },
@@ -53,6 +53,7 @@
     "babel-polyfill": "^6.26.0",
     "concurrently": "^6.3.0",
     "css-loader": "^5.0.2",
+    "html-webpack-plugin": "^4.2.2",
     "node-sass": "^8.0.0",
     "nodemon": "^2.0.13",
     "sass-loader": "^10.4.1",

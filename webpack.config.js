@@ -1,5 +1,6 @@
 // @ts-nocheck
 const path = require("path");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 require("babel-polyfill");
 
 module.exports = {
@@ -9,8 +10,13 @@ module.exports = {
   mode: "development",
   output: {
     path: __dirname,
-    filename: "./static/built/bundle.js",
+    filename: "./static/bundle.js",
   },
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: "./static/template/index.html",
+    }),
+  ],
   resolve: {
     alias: {
       "@styles": path.resolve(__dirname, "client/styles"),
@@ -19,16 +25,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: path.join(__dirname, "."),
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env", "@babel/preset-react"],
-            },
-          },
-        ],
+        loader: "babel-loader",
+        options: { presets: ["@babel/env", "@babel/preset-react"] },
       },
       {
         test: /\.s[ac]ss$/,
