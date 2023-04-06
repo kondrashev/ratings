@@ -4,7 +4,7 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 require("babel-polyfill");
 
 module.exports = {
-  entry: ["babel-polyfill", "./client/App.js"],
+  entry: ["babel-polyfill", "./client/App.jsx"],
   devtool: "sourcemaps",
   cache: true,
   mode: "development",
@@ -18,6 +18,7 @@ module.exports = {
     }),
   ],
   resolve: {
+    extensions: [".js", ".jsx"],
     alias: {
       "@styles": path.resolve(__dirname, "client/styles"),
     },
