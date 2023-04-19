@@ -22,5 +22,5 @@ jobs:
         run: npm ci
       - name: build
         run: npm run build
-      - name: docker build
+      - name: docker
         run: docker build -t image .
