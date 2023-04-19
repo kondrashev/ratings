@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["node", "index.js"]
+CMD ["cross-env", "NODE_ENV=development", "nodemon", "index.js"]
