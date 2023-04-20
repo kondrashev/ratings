@@ -1,6 +1,7 @@
 // @ts-nocheck
 const { Sequelize } = require("sequelize");
-if (process.env.NODE_ENV === "development") {
+
+if (process.env.NODE_ENV) {
   module.exports = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
