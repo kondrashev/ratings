@@ -3,13 +3,13 @@ const { Sequelize } = require("sequelize");
 
 if (process.env.NODE_ENV === "development") {
   module.exports = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+    process.env.DB_NAME || "education",
+    process.env.DB_USER || "postgres",
+    process.env.DB_PASSWORD || "1976",
     {
-      host: process.env.DB_HOST,
-      dialect: process.env.DB_DIALECT,
-      port: process.env.DB_PORT,
+      host: process.env.DB_HOST || "localhost",
+      dialect: process.env.DB_DIALECT || "postgres",
+      port: process.env.DB_PORT || "5433",
     }
   );
 } else {
