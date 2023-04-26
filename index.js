@@ -20,7 +20,6 @@ app.use(errorHandler);
 
 const start = async () => {
   try {
-    await sequelize.authenticate();
     await sequelize.sync({ alter: true });
     const getUserAd = await User.findOne({ where: { login: "pavel" } });
     !getUserAd &&
