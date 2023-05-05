@@ -64,7 +64,6 @@ const AuthorizationForm = () => {
     }
   }, [values.typeUser]);
   return (
-    // <Box sx={styles.formAuthorization}>
     <Box className="formAuthorization">
       <TextField
         id="outlined-search"
