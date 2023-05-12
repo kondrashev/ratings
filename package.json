@@ -9,9 +9,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
-    "client": "webpack --watch -d --output ./static/bundle.js",
+    "client": "webpack --watch --output ./static/bundle.js",
     "all": "concurrently \"npm run dev\" \"npm run client\"",
-    "build": "webpack"
+    "build": "webpack --output ./static/bundle.js"
   },
   "keywords": [],
   "author": "",

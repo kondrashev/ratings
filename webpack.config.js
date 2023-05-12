@@ -9,8 +9,8 @@ module.exports = {
   cache: true,
   mode: "development",
   output: {
-    path: __dirname,
-    filename: "./static/bundle.js",
+    path: path.resolve(__dirname, "static"),
+    filename: "bundle.js",
   },
   plugins: [
     new HTMLWebpackPlugin({
