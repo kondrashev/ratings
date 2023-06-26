@@ -1,13 +1,14 @@
 // @ts-nocheck
 const getRating = (item, teacher, exercise, conspectus) => {
-  return (
+  let rating =
     Object.values(item.options ? item.options : item)
       .filter((element) => element !== "н")
       .reduce((sum, element) => sum + parseInt(element), 0) +
     parseInt(teacher) +
     parseInt(exercise) +
-    parseInt(conspectus)
-  );
+    parseInt(conspectus);
+  if (rating > 95) rating = 95;
+  return rating;
 };
 const getExam = (rating, report) => {
   if (report === "+") {
