@@ -94,7 +94,7 @@ class DisciplineController {
                 item,
                 student.teacher,
                 student.exercise,
-                student.conspectus
+                student.conspectus/Users/pavel/Documents/Development/Front-End/ratings/controllers/disciplineController.js
               ),
               report: student.report,
               exam: getExam(
