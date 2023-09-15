@@ -29,7 +29,7 @@ const getExam = (rating, report) => {
     return "Н/З";
   }
 };
-const informationUpload = (data, group) => {
+const informationUpload = (data, group, getDiscipline) => {
   //Getting all keys and values
   let keys = data.map((item) => {
     return Object.keys(item)[0].split(";");
@@ -132,14 +132,15 @@ const informationUpload = (data, group) => {
       ];
     }
   );
-  if (newKeys[0].length < 19) {
+  const { name } = getDiscipline;
+  if (name === "Матеріалознавство") {
     keys = newKeys.map(([, , ...item]) =>
       item.filter((item) => item !== undefined).slice(0, 9)
     );
     values = newValues.map(([, , ...item]) =>
       item.filter((item) => item !== undefined).slice(0, 9)
     );
-  } else {
+  } else if (name === "ТКМ") {
     keys = newKeys.map(([, , ...item]) =>
       item.filter((item) => item !== undefined)
     );
