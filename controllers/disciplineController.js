@@ -61,7 +61,7 @@ class DisciplineController {
       const fileName = "data.csv";
       csvFile.mv(path.resolve(__dirname, "..", "static/csv", fileName));
       let data = await csv().fromFile("static/csv/data.csv");
-      data = informationUpload(data, getGroup.name);
+      data = informationUpload(data, getGroup.name, getDiscipline);
       data.forEach(async (item) => {
         const student = await Student.findOne({
           where: {
@@ -94,7 +94,7 @@ class DisciplineController {
                 item,
                 student.teacher,
                 student.exercise,
-                student.conspectus/Users/pavel/Documents/Development/Front-End/ratings/controllers/disciplineController.js
+                student.conspectus
               ),
               report: student.report,
               exam: getExam(
