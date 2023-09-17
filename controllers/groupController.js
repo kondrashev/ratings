@@ -36,8 +36,8 @@ class GroupController {
     const { listId } = req.body;
     listId.forEach(async (id) => {
       await Group.destroy({ where: { id } });
-      return res.json(listId);
     });
+    return res.json(listId);
   }
 }
 module.exports = new GroupController();

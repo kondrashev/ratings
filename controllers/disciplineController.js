@@ -41,8 +41,8 @@ class DisciplineController {
     const { listId } = req.body;
     listId.forEach(async (id) => {
       await Discipline.destroy({ where: { id } });
-      return res.json(listId);
     });
+    return res.json(listId);
   }
   async uploadInformation(req, res, next) {
     try {
