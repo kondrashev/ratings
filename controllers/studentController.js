@@ -86,8 +86,8 @@ class StudentController {
       const { listId } = req.body;
       listId.forEach(async (id) => {
         await Student.destroy({ where: { id } });
-        return res.json(listId);
       });
+      return res.json(listId);
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
