@@ -90,6 +90,7 @@ const ListStudents = (props) => {
       dispatch(loadStudentsFetchData(data));
     }
   }, [values.isActiveSearchStudent, updateStudent, values.update]);
+  const sumRating = listStudents.reduce((sum, item)=>sum+item.rating, 0);
   const rows = listStudents.map((item) => {
     return createData(item);
   });
@@ -245,7 +246,7 @@ const ListStudents = (props) => {
             component="div">
             {values.typeUser === "USER"
               ? String(values.titleNameGroup).toUpperCase()
-              : "Студенти"}
+              : `Студенти_загальний рейтинг-${sumRating}`}
           </Typography>
         )}
         {numSelected > 0 && values.typeUser === "ADMIN" ? (
