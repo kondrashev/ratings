@@ -22,6 +22,8 @@ import IconHome from "./IconHome";
 import Avatar from "@mui/material/Avatar";
 import OpenMenu from "./OpenMenu";
 import { useSelector } from "react-redux";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -243,26 +245,24 @@ export default function MainMenu() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box>
-            {values.typeUser === "ADMIN" && (
-              <Button
-                disabled={
-                  values.showListStudents && listStudents[0]?.options
-                    ? false
-                    : true
-                }
-                onClick={showColumns}
-                sx={{
-                  width: "auto",
-                  height: "30px",
-                  color: "#fff",
-                  background: "#5689D3",
-                  "&:hover": {
-                    background: "grey",
-                  },
-                }}>
-                {values.isShowColumns ? "HIDE COLUMNS" : "SHOW COLUMNS"}
-              </Button>
-            )}
+            <Button
+              disabled={
+                values.showListStudents && listStudents[0]?.options
+                  ? false
+                  : true
+              }
+              onClick={showColumns}
+              sx={{
+                width: "auto",
+                height: "30px",
+                color: "#fff",
+                background: "#5689D3",
+                "&:hover": {
+                  background: "grey",
+                },
+              }}>
+              {values.isShowColumns ? <VisibilityOff /> : <Visibility />}
+            </Button>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
