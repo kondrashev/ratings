@@ -261,7 +261,7 @@ export default function MainMenu() {
                   background: "grey",
                 },
               }}>
-              {values.isShowColumns ? <VisibilityOff /> : <Visibility />}
+              {values.isShowColumns ? <Visibility /> : <VisibilityOff />}
             </Button>
             <IconButton
               size="large"
