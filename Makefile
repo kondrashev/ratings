@@ -2,16 +2,16 @@
 start: 1 2 3 4 5
 1:
 	echo "Running docker compose stop"
-	docker compose down
+	docker-compose down
 2:
 	echo "Running webpack build"
 	npm run build
 3:
 	echo "Running docker compose build"
-	docker compose build
+	docker-compose build
 4:
 	echo "Running docker compose start"
-	docker compose up -d
+	docker-compose -f docker-compose-dev.yml up -d
 5:
 	echo "Running webpack watch"
 	npm run client
