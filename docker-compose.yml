@@ -2,14 +2,11 @@ version: "3.3"
 services:
   node_backend:
     container_name: node_server
-    image: ratings
-    build:
-      context: .
+    image: kondrashev/ratings:latest
     restart: always
     ports:
       - 80:80
     environment:
-      - PORT=80
       - DB_NAME=rating
       - DB_USER=postgres
       - DB_PASSWORD=1976
