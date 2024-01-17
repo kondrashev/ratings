@@ -1,21 +1,7 @@
-version: "3.3"
+version: "3"
 services:
-  node_backend:
-    container_name: node_server
-    image: kondrashev/ratings:latest
-    restart: always
-    ports:
-      - 80:80
-    environment:
-      - DB_NAME=rating
-      - DB_USER=postgres
-      - DB_PASSWORD=1976
-      - DB_HOST=node_db
-    command: npm run dev
-    depends_on:
-      - node_db
-  node_db:
-    container_name: node_db
+  database:
+    container_name: database
     image: "postgres:14"
     ports:
       - 5434:5434
@@ -26,5 +12,17 @@ services:
     volumes:
       - nps_data:/var/lib/postgresql/data
     restart: always
+  server:
+    container_name: server
+    image: kondrashev/ratings:latest
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      - DB_NAME=rating
+      - DB_USER=postgres
+      - DB_PASSWORD=1976
+      - DB_HOST=database
+    command: npm run dev
 volumes:
   nps_data: {}
