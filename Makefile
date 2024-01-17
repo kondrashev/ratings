@@ -20,7 +20,7 @@ start: 1 2 3 4 5 6 7 8 9
 	docker login
 7:
 	echo "Docker rename image"
-	docker tag ratings-node_backend:latest kondrashev/ratings
+	docker tag ratings-server:latest kondrashev/ratings
 8:
 	echo "Docker push image"
 	docker push kondrashev/ratings
