@@ -25,7 +25,8 @@ services:
     - DB_USER=postgres
     - DB_PASSWORD=1976
     - DB_HOST=database
-    command: npm run dev
+    links:
+      - database
     volumes:
       - /Users/pavel/Documents/Development/Front-End/ratings:/app
       - /app/node_modules
