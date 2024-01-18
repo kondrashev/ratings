@@ -23,6 +23,7 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=1976
       - DB_HOST=database
-    command: npm run dev
+    links:
+      - database
 volumes:
   nps_data: {}
