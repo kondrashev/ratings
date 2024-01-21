@@ -1,4 +1,4 @@
-#To start these commands necessary to run this => /make -f Makefile_aws.mak -j 1 start/
+#To start these commands necessary to run this => /make -f Makefile-aws.mak -j 1 start/
 start: 1 2 3 4
 1:
 	echo "Remove all containers from ec2"
