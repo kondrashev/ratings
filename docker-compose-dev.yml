@@ -1,8 +1,8 @@
-version: "3"
+version: '3'
 services:
   database:
     container_name: database
-    image: "postgres:14"
+    image: 'postgres:14'
     ports:
       - 5434:5434
     environment:
@@ -21,14 +21,14 @@ services:
     ports:
       - 80:80
     environment:
-    - DB_NAME=rating
-    - DB_USER=postgres
-    - DB_PASSWORD=1976
-    - DB_HOST=database
+      - DB_NAME=rating
+      - DB_USER=postgres
+      - DB_PASSWORD=1976
+      - DB_HOST=database
     links:
       - database
     volumes:
-      - /Users/pavel/Documents/Development/Front-End/ratings:/app
       - /app/node_modules
+      - ./:/app
 volumes:
   nps_data: {}
