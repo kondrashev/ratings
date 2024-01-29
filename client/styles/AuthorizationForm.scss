@@ -1,19 +1,18 @@
 .formAuthorization {
-    width: 400px;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    background: #9cd7f0;
-    border-radius: 10px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 30%);
+  width: 400px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #a0d7f0;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 30%);
 
-    .fields {
-        width: 360px;
-        height: 50px;
-    }
-    
+  .fields {
+    width: 360px;
+    height: 50px;
+  }
 }
