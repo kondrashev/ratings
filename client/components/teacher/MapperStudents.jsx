@@ -1,70 +1,64 @@
 // @ts-nocheck
 export const headCells = (dates) => {
-  const listDates = JSON.parse(dates?.listDates || "[]").filter(
-    (item) => item !== null
-  );
+  const listDates = JSON.parse(dates?.listDates || '[]').filter((item) => item !== null);
   const tests = listDates.map(([test, date]) => {
     return {
       id: `test_${test}`,
       numeric: true,
       label: `${test}_${date}`,
-      date: new Date(date.split(".").reverse().join(".")).getTime(),
+      date: new Date(date.split('.').reverse().join('.')).getTime(),
     };
   });
   return [
     {
-      id: "surName",
+      id: 'surName',
       numeric: true,
-      label: "Прізвище",
+      label: 'Прізвище',
+    },
+    {
+      id: 'variant',
+      numeric: true,
+      label: 'Варіант',
     },
     ...tests.sort((a, b) => (a.date > b.date ? 1 : -1)),
     {
-      id: "report",
+      id: 'report',
       numeric: true,
-      label: "Звіт",
+      label: 'Звіт',
     },
     {
-      id: "teacher",
+      id: 'teacher',
       numeric: true,
-      label: "Викладач",
+      label: 'Викладач',
     },
     {
-      id: "conspectus",
+      id: 'conspectus',
       numeric: true,
-      label: "Конспект",
+      label: 'Конспект',
     },
     {
-      id: "exercise",
+      id: 'exercise',
       numeric: true,
-      label: "Завдання",
+      label: 'Завдання',
     },
     {
-      id: "rating",
+      id: 'rating',
       numeric: true,
-      label: "Рейтинг",
+      label: 'Рейтинг',
     },
     {
-      id: "exam",
+      id: 'exam',
       numeric: true,
-      label: "Екзамен",
+      label: 'Екзамен',
     },
   ];
 };
-export function createData({
-  id,
-  surName,
-  report,
-  teacher,
-  conspectus,
-  exercise,
-  rating,
-  exam,
-  options,
-}) {
+export function createData({ id, surName, variant, report, teacher, conspectus, exercise, rating, exam, options }) {
   return {
     id,
     surName,
-    ...JSON.parse(options || "{}"),
+    variant,
+    ...JSON.parse(options || '{}'),
     report,
     teacher,
     conspectus,
@@ -74,17 +68,7 @@ export function createData({
   };
 }
 export const showNavigation = (...args) => {
-  const [
-    values,
-    setValues,
-    suffixDisciplineURL,
-    suffixGroupURL,
-    name,
-    itemId,
-    disciplineId,
-    idDiscipline,
-    idGroup,
-  ] = args;
+  const [values, setValues, suffixDisciplineURL, suffixGroupURL, name, itemId, disciplineId, idDiscipline, idGroup] = args;
   if (!values.isShowSearchStudent) {
     if (!disciplineId) {
       setValues({
@@ -116,8 +100,8 @@ export const showNavigation = (...args) => {
       showListItems: false,
       getGroups: false,
       showListStudents: true,
-      valueNavigationItemDiscipline: "",
-      valueNavigationItemGroup: "",
+      valueNavigationItemDiscipline: '',
+      valueNavigationItemGroup: '',
     });
     suffixDisciplineURL.current = idDiscipline;
     suffixGroupURL.current = idGroup;

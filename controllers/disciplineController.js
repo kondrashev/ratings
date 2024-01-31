@@ -1,13 +1,9 @@
 // @ts-nocheck
-const { Discipline, Group, Student } = require("../models/models");
-const ApiError = require("../error/ApiError");
-const csv = require("csvtojson");
-const path = require("path");
-const {
-  informationUpload,
-  getRating,
-  getExam,
-} = require("../controllers/someFunctions");
+const { Discipline, Group, Student } = require('../models/models');
+const ApiError = require('../error/ApiError');
+const csv = require('csvtojson');
+const path = require('path');
+const { informationUpload, getRating, getExam } = require('../controllers/someFunctions');
 
 class DisciplineController {
   async addDiscipline(req, res, next) {
@@ -18,7 +14,7 @@ class DisciplineController {
         const discipline = await Discipline.create({ name });
         return res.json(discipline);
       } else {
-        return res.json("This discipline already exists!!!");
+        return res.json('This discipline already exists!!!');
       }
     } catch (e) {
       next(ApiError.badRequest(e.message));
@@ -58,10 +54,20 @@ class DisciplineController {
           id: groupId,
         },
       });
-      const fileName = "data.csv";
-      csvFile.mv(path.resolve(__dirname, "..", "static/csv", fileName));
-      let data = await csv().fromFile("static/csv/data.csv");
+      const fileName = 'data.csv';
+      csvFile.mv(path.resolve(__dirname, '..', 'static/csv', fileName));
+      let data = await csv().fromFile('static/csv/data.csv');
       data = informationUpload(data, getGroup.name, getDiscipline);
+      const getVariant = (numberVariants) => {
+        let randomVariant = Math.floor(Math.random() * numberVariants);
+        if (randomVariant === 0) {
+          randomVariant = 1;
+          return randomVariant;
+        }
+        if (randomVariant !== 0) {
+          return randomVariant;
+        }
+      };
       data.forEach(async (item) => {
         const student = await Student.findOne({
           where: {
@@ -73,41 +79,30 @@ class DisciplineController {
           await Student.create({
             surName: item.surName,
             groupId,
+            variant: getVariant(16),
             nameDiscipline: getDiscipline.name,
             options: JSON.stringify(item.options),
             teacher: 0,
             conspectus: 0,
             exercise: 0,
             rating: getRating(item, 0, 0, 0),
-            report: "-",
-            exam: getExam(getRating(item, 0, 0, 0), "-"),
+            report: '-',
+            exam: getExam(getRating(item, 0, 0, 0), '-'),
           });
         } else {
           await Student.update(
             {
               surName: item.surName,
+              variant,
               options: JSON.stringify(item.options),
               teacher: student.teacher,
               conspectus: student.conspectus,
               exercise: student.exercise,
-              rating: getRating(
-                item,
-                student.teacher,
-                student.exercise,
-                student.conspectus
-              ),
+              rating: getRating(item, student.teacher, student.exercise, student.conspectus),
               report: student.report,
-              exam: getExam(
-                getRating(
-                  item,
-                  student.teacher,
-                  student.exercise,
-                  student.conspectus
-                ),
-                student.report
-              ),
+              exam: getExam(getRating(item, student.teacher, student.exercise, student.conspectus), student.report),
             },
-            { where: { id: student.id } }
+            { where: { id: student.id } },
           );
         }
       });
