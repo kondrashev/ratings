@@ -1,0 +1,38 @@
+version: '3'
+services:
+  database:
+    container_name: database
+    image: postgres:14
+    ports:
+      - 5434:5434
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1976
+      - POSTGRES_DB=rating
+    volumes:
+      - nps_data:/var/lib/postgresql/data
+    restart: always
+  server:
+    container_name: server
+    image: kondrashev/ratings:latest
+    restart: always
+    environment:
+      - DB_NAME=rating
+      - DB_USER=postgres
+      - DB_PASSWORD=1976
+      - DB_HOST=database
+    links:
+      - database
+  nginx:
+    container_name: nginx
+    depends_on:
+      - server
+    image: nginx:latest
+    volumes:
+      - ./:/etc/nginx/conf.d/:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /tmp/acme_challenge:/tmp/acme_challenge
+    ports:
+      - 80:80
+volumes:
+  nps_data: {}
