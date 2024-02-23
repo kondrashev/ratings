@@ -12,6 +12,8 @@ services:
     volumes:
       - nps_data:/var/lib/postgresql/data
     restart: always
+    networks:
+      - app
   server:
     container_name: server
     image: kondrashev/ratings:latest
@@ -23,16 +25,24 @@ services:
       - DB_HOST=database
     links:
       - database
+    networks:
+      - app
   nginx:
     container_name: nginx
     depends_on:
       - server
-    image: nginx:latest
+    image: nginx:1.21.1-alpine
     volumes:
       - ./:/etc/nginx/conf.d/:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /etc/letsencrypt:/etc/letsencrypt/:ro
       - /tmp/acme_challenge:/tmp/acme_challenge
     ports:
       - 80:80
+      - 443:443
+    networks:
+      - app
 volumes:
   nps_data: {}
+networks:
+  app:
+    driver: bridge
