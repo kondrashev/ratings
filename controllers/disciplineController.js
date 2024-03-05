@@ -54,8 +54,7 @@ class DisciplineController {
           id: groupId,
         },
       });
-      const fileName = 'data.csv';
-      csvFile.mv(path.resolve(__dirname, '..', 'static/csv', fileName));
+      csvFile.mv(path.resolve(__dirname, '..', 'static/csv', 'data.csv'));
       let data = await csv().fromFile('static/csv/data.csv');
       data = informationUpload(data, getGroup.name, getDiscipline);
       const getVariant = (numberVariants) => {
@@ -89,11 +88,20 @@ class DisciplineController {
             report: '-',
             exam: getExam(getRating(item, 0, 0, 0), '-'),
           });
-        } else {
+        }
+      });
+      data.forEach(async (item) => {
+        const student = await Student.findOne({
+          where: {
+            surName: item.surName,
+            groupId: getGroup.id,
+          },
+        });
+        if (student) {
           await Student.update(
             {
               surName: item.surName,
-              variant,
+              variant: item.variant,
               options: JSON.stringify(item.options),
               teacher: student.teacher,
               conspectus: student.conspectus,
