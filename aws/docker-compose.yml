@@ -31,7 +31,7 @@ services:
     container_name: nginx
     depends_on:
       - server
-    image: nginx:1.21.1-alpine
+    image: nginx:latest
     volumes:
       - ./:/etc/nginx/conf.d/:ro
       - /etc/letsencrypt:/etc/letsencrypt/:ro
