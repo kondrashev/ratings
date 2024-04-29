@@ -1,7 +1,8 @@
 // @ts-nocheck
-const { Discipline, Group, Student, Dates } = require("../models/models");
-const ApiError = require("../error/ApiError");
-const { getRating, getExam } = require("../controllers/someFunctions");
+const { Discipline, Group, Student, Dates } = require('../models/models');
+const ApiError = require('../error/ApiError');
+const { Op } = require('sequelize');
+const { getRating, getExam } = require('../controllers/someFunctions');
 class StudentController {
   async addStudent(req, res, next) {
     try {
@@ -24,17 +25,17 @@ class StudentController {
           surName,
           groupId,
           nameDiscipline: getDiscipline.name,
-          options: "",
+          options: '',
           teacher: 0,
           conspectus: 0,
           exercise: 0,
           rating: 0,
-          report: "-",
-          exam: "Н/З",
+          report: '-',
+          exam: 'Н/З',
         });
         return res.json(student);
       } else {
-        return res.json("This student already exists!!!");
+        return res.json('This student already exists!!!');
       }
     } catch (e) {
       next(ApiError.badRequest(e.message));
@@ -45,18 +46,10 @@ class StudentController {
       const { studentId, item, valueItem } = req.body;
       await Student.update({ [item]: valueItem }, { where: { id: studentId } });
       const getStudent = await Student.findOne({ where: { id: studentId } });
-      const tests = JSON.parse(getStudent?.options || "[]");
-      const newRating = getRating(
-        tests,
-        getStudent?.teacher,
-        getStudent?.conspectus,
-        getStudent?.exercise
-      );
+      const tests = JSON.parse(getStudent?.options || '[]');
+      const newRating = getRating(tests, getStudent?.teacher, getStudent?.conspectus, getStudent?.exercise);
       const newExam = getExam(newRating, getStudent?.report);
-      await Student.update(
-        { rating: newRating, exam: newExam },
-        { where: { id: studentId } }
-      );
+      await Student.update({ rating: newRating, exam: newExam }, { where: { id: studentId } });
       return res.json(getStudent);
     } catch (e) {
       next(ApiError.badRequest(e.message));
@@ -100,11 +93,11 @@ class StudentController {
           groupId,
         },
       });
-      const datesList = JSON.parse(getDates?.get("listDates") || "[]");
+      const datesList = JSON.parse(getDates?.get('listDates') || '[]');
       listDates.forEach((item, index) => {
-        const [test, date] = item || [["", ""]];
+        const [test, date] = item || [['', '']];
         if (date) {
-          const box = [...(datesList[index] || [["", ""]])];
+          const box = [...(datesList[index] || [['', '']])];
           box[0] = test;
           box[1] = date;
           datesList[index] = box;
@@ -113,10 +106,7 @@ class StudentController {
       const sortDates = JSON.stringify(datesList);
       const newListDates = !getDates
         ? await Dates.create({ listDates: sortDates, groupId })
-        : await Dates.update(
-            { listDates: sortDates, groupId },
-            { where: { groupId } }
-          );
+        : await Dates.update({ listDates: sortDates, groupId }, { where: { groupId } });
       return res.json(newListDates);
     } catch (e) {
       next(ApiError.badRequest(e.message));
@@ -157,6 +147,15 @@ class StudentController {
       searchStudent[4] = group.moodle;
       searchStudent[5] = student;
       return res.json(searchStudent);
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
+  async searchStudents(req, res, next) {
+    try {
+      const { pattern } = req.query;
+      const students = await Student.findAll({ where: { surName: { [Op.startsWith]: pattern } } });
+      return res.json(students);
     } catch (e) {
       next(ApiError.badRequest(e.message));
     }
