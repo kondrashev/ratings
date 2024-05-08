@@ -186,7 +186,7 @@ export default function MainMenu() {
         values,
         setValues,
       };
-      dispatch(searchStudentsFetchData(data));
+      event.target.value && dispatch(searchStudentsFetchData(data));
     }
   };
   const itemSearch = (event) => {
