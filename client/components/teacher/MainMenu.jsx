@@ -178,14 +178,16 @@ export default function MainMenu() {
       ...values,
       nameStudent: values.typeUser === 'USER' ? event.target.value.toUpperCase() : event.target.value,
     });
-    const data = {
-      url: `${endpoints.searchStudents}?pattern=${String(event.target.value).substring(0, 1).toUpperCase()}${String(event.target.value).substring(
-        1,
-      )}`,
-      values,
-      setValues,
-    };
-    event.target.value && dispatch(searchStudentsFetchData(data));
+    if (values.typeUser === 'ADMIN') {
+      const data = {
+        url: `${endpoints.searchStudents}?pattern=${String(event.target.value).substring(0, 1).toUpperCase()}${String(event.target.value).substring(
+          1,
+        )}`,
+        values,
+        setValues,
+      };
+      dispatch(searchStudentsFetchData(data));
+    }
   };
   const itemSearch = (event) => {
     if (event.key === 'Enter' && event.target.value) {
