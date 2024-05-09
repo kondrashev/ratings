@@ -42,7 +42,7 @@ const Search = styled('div')(({ theme }) => ({
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    width: '235px',
   },
 }));
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -230,8 +230,18 @@ export default function MainMenu() {
   const getSurNameStudent = (surName) => {
     setValues({
       ...values,
-      nameStudent: '',
+      nameStudent: surName,
+      errorForm: false,
+      showListStudents: true,
+      showListItems: false,
+      isActiveSearchStudent: !values.isActiveSearchStudent,
+      isShowSearchStudent: true,
+      showNavigationItemDiscipline: true,
+      showNavigationItemGroup: true,
+      showNavigationItemStudent: true,
+      isActiveListItems: false,
     });
+    searchStudents.length = 0;
   };
   return (
     <Box>
