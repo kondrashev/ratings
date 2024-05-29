@@ -27,9 +27,9 @@ services:
       - DB_HOST=database
     links:
       - database
-    volumes:
-      - /app/node_modules
-      - ./:/app
+    # volumes:
+    #   - /app/node_modules
+    #   - ./:/app
     networks:
       - app
   nginx:
