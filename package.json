@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon --inspect=0.0.0.0:9229 index.js",
     "dev": "webpack --watch --output ./static/bundle.js",
     "build": "webpack --output ./static/bundle.js"
   },
