@@ -13,4 +13,5 @@ router.post('/add/dates', checkRole('ADMIN'), studentController.addListDates);
 router.get('/get/dates', checkRole('ADMIN'), studentController.getListDates);
 router.get('/get/dates/search', checkRole('USER'), studentController.getSearchListDates);
 router.get('/get/search/group', checkRole('USER'), studentController.getSearchGroup);
+router.get('/get/search/groups', checkRole('USER'), studentController.searchGroups);
 module.exports = router;

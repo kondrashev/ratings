@@ -160,5 +160,14 @@ class StudentController {
       next(ApiError.badRequest(e.message));
     }
   }
+  async searchGroups(req, res, next) {
+    try {
+      const { pattern } = req.query;
+      const groups = await Group.findAll({ where: { name: { [Op.startsWith]: pattern } } });
+      return res.json(groups);
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
+    }
+  }
 }
 module.exports = new StudentController();
