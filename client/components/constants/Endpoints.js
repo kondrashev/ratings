@@ -18,5 +18,6 @@ export default {
   addListDates: '/student/add/dates',
   getListDates: '/student/get/dates',
   getSearchGroup: '/student/get/search/group',
+  getSearchGroups: '/student/get/search/groups',
   getListDatesSearch: '/student/get/dates/search',
 };

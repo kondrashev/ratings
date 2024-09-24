@@ -23,6 +23,7 @@ import Avatar from '@mui/material/Avatar';
 import OpenMenu from './OpenMenu';
 import endpoints from '../constants/Endpoints';
 import { searchStudentsFetchData } from '../../store/students/action_search_students';
+import { searchGroupsFetchData } from '../../store/students/action_search_groups';
 import { useSelector, useDispatch } from 'react-redux';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -106,6 +107,7 @@ export default function MainMenu() {
   };
   const menuId = 'primary-search-account-menu';
   const searchStudents = useSelector((state) => state.studentReducer.searchStudents);
+  const searchGroups = useSelector((state) => state.studentReducer.searchGroups);
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -188,6 +190,16 @@ export default function MainMenu() {
       };
       event.target.value && dispatch(searchStudentsFetchData(data));
     }
+    if (values.typeUser === 'USER') {
+      const data = {
+        url: `${endpoints.getSearchGroups}?pattern=${String(event.target.value).substring(0, 1).toUpperCase()}${String(event.target.value).substring(
+          1,
+        )}`,
+        values,
+        setValues,
+      };
+      event.target.value && dispatch(searchGroupsFetchData(data));
+    }
   };
   const itemSearch = (event) => {
     if (event.key === 'Enter' && event.target.value) {
@@ -243,6 +255,23 @@ export default function MainMenu() {
     });
     searchStudents.length = 0;
   };
+  const getNameGroup = (name) => {
+    setValues({
+      ...values,
+      nameStudent: name,
+      errorForm: false,
+      isShowSearchStudent: true,
+      showListStudents: true,
+      showListItems: false,
+      isActiveSearchStudent: !values.isActiveSearchStudent,
+      isActiveListItems: false,
+      showNavigationItemDiscipline: false,
+      showNavigationItemGroup: false,
+      showNavigationItemStudent: false,
+      titleNameGroup: name,
+    });
+    searchGroups.length = 0;
+  };
   return (
     <Box>
       <AppBar className={classes.globalStyle}>
@@ -280,6 +309,17 @@ export default function MainMenu() {
                 {searchStudents.map((student) => (
                   <MenuItem key={student.id} onClick={() => getSurNameStudent(student.surName)}>
                     <ListItemText>{student.surName}</ListItemText>
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Paper>
+          ) : null}
+          {values.nameStudent.length !== 0 && searchGroups.length > 0 ? (
+            <Paper className={classes.searchStudents}>
+              <MenuList>
+                {searchGroups.map((group) => (
+                  <MenuItem key={group.id} onClick={() => getNameGroup(group.name)}>
+                    <ListItemText>{group.name}</ListItemText>
                   </MenuItem>
                 ))}
               </MenuList>
