@@ -67,23 +67,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-const useStyles = makeStyles({
-  globalStyle: {
-    width: '100%',
-    position: 'absolute',
-  },
-  searchStudents: {
-    width: '235px',
-    position: 'absolute',
-    top: '55px',
-    left: '226px',
-  },
-  avatar: { marginLeft: '50px', marginRight: '20px' },
-});
 export default function MainMenu() {
+  const { values, setValues } = useContext(ApplictationContext);
+  const useStyles = makeStyles({
+    globalStyle: {
+      width: '100%',
+      position: 'absolute',
+    },
+    searchStudents: {
+      width: '235px',
+      position: 'absolute',
+      top: '55px',
+      left: values.typeUser === 'ADMIN' ? '226px' : '114px',
+    },
+    avatar: { marginLeft: '50px', marginRight: '20px' },
+  });
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { values, setValues } = useContext(ApplictationContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
