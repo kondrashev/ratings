@@ -239,10 +239,11 @@ export default function MainMenu() {
       isShowColumns: !values.isShowColumns,
     });
   };
-  const getSurNameStudent = (surName) => {
+  const getSurNameStudent = (surName, nameGroup) => {
     setValues({
       ...values,
       nameStudent: surName,
+      nameGroup,
       errorForm: false,
       showListStudents: true,
       showListItems: false,
@@ -299,6 +300,7 @@ export default function MainMenu() {
                 setValues({
                   ...values,
                   nameStudent: '',
+                  nameGroup: '',
                 });
               }}
             />
@@ -306,11 +308,14 @@ export default function MainMenu() {
           {values.nameStudent.length !== 0 && searchStudents.length > 0 ? (
             <Paper className={classes.searchStudents}>
               <MenuList>
-                {searchStudents.map((student) => (
-                  <MenuItem key={student.id} onClick={() => getSurNameStudent(student.surName)}>
-                    <ListItemText>{student.surName}</ListItemText>
-                  </MenuItem>
-                ))}
+                {searchStudents.map((student) => {
+                  const { surName, nameGroup } = student;
+                  return (
+                    <MenuItem key={student.id} onClick={() => getSurNameStudent(surName, nameGroup)}>
+                      <ListItemText>{`${student.surName} ${student.nameGroup}`}</ListItemText>
+                    </MenuItem>
+                  );
+                })}
               </MenuList>
             </Paper>
           ) : null}
