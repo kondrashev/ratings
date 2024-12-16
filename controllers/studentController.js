@@ -133,9 +133,9 @@ class StudentController {
   }
   async searchStudent(req, res, next) {
     try {
-      const { surName } = req.query;
-      const student = await Student.findOne({ where: { surName } });
-      const group = await Group.findOne({ where: { id: student.groupId } });
+      const { surName, nameGroup } = req.query;
+      const group = await Group.findOne({ where: { name: nameGroup } });
+      const student = await Student.findOne({ where: { surName, groupId: group.id } });
       const discipline = await Discipline.findOne({
         where: { id: group.disciplineId },
       });
@@ -154,7 +154,15 @@ class StudentController {
   async searchStudents(req, res, next) {
     try {
       const { pattern } = req.query;
-      const students = await Student.findAll({ where: { surName: { [Op.startsWith]: pattern } } });
+      let students = await Student.findAll({ where: { surName: { [Op.startsWith]: pattern } } });
+      for (let i = 0; i < students.length; i++) {
+        const { name } = await Group.findOne({ where: { id: students[i].groupId } });
+        students[i].groupId = name;
+      }
+      students = students.map((student) => {
+        const { id, surName, groupId } = student;
+        return { id, surName, nameGroup: groupId };
+      });
       return res.json(students);
     } catch (e) {
       next(ApiError.badRequest(e.message));

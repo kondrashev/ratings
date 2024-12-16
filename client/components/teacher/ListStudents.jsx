@@ -71,7 +71,7 @@ const ListStudents = (props) => {
           values.typeUser === 'ADMIN'
             ? `${endpoints.searchStudent}?surName=${String(values.nameStudent).substring(0, 1).toUpperCase()}${String(values.nameStudent).substring(
                 1,
-              )}`
+              )}&nameGroup=${values.nameGroup}`
             : `${endpoints.getSearchGroup}?nameGroup=${values.nameStudent.slice(0, 3)}${values.nameStudent.slice(3).toLowerCase()}`,
         values,
         setValues,
