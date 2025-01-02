@@ -46,6 +46,9 @@ const FormItem = () => {
       getListDates: false,
       update: !values.update,
       uploadFile: false,
+      valueIdDiscipline: 0,
+      valueIdGroup: 0,
+      nameStudent: '',
     });
     itemId.current = [];
   };
@@ -151,6 +154,10 @@ const FormItem = () => {
     const { current } = itemId;
     if (type === 'Discipline') {
       current[0] = event.target.value;
+      setValues({
+        ...values,
+        valueIdDiscipline: event.target.checked,
+      });
       const data = {
         url: `${endpoints.getGroups}?disciplineId=${event.target.value}`,
         values,
@@ -159,6 +166,10 @@ const FormItem = () => {
       dispatch(loadItemsFetchData(data));
     } else {
       current[1] = event.target.value;
+      setValues({
+        ...values,
+        valueIdGroup: event.target.checked,
+      });
     }
     current.length === 2 && setValues({ ...values, upLoadFileButton: false });
   };
@@ -230,7 +241,7 @@ const FormItem = () => {
           variant="outlined"
           style={styles.fields}
           onChange={changeNameItem}
-          onKeyPress={onPressKey}
+          onKeyDownCapture={onPressKey}
           disabled={values.disabledDiscipline}
         />
       ) : (
@@ -244,7 +255,8 @@ const FormItem = () => {
             variant="outlined"
             style={styles.fields}
             onChange={changeNameItem}
-            onKeyPress={onPressKey}
+            onKeyDownCapture={onPressKey}
+            disabled={values.valueIdDiscipline === 0 ? true : false}
           />
           <FormControlLabel control={<Switch checked={values.isActiveMoodle} onChange={switchMoodle} />} label="Moodle" />
         </Box>
@@ -257,7 +269,8 @@ const FormItem = () => {
           variant="outlined"
           style={styles.fields}
           onChange={changeNameItem}
-          onKeyPress={onPressKey}
+          onKeyDownCapture={onPressKey}
+          disabled={values.valueIdDiscipline === 0 && values.valueIdGroup === 0 ? true : false}
         />
       )}
       {values.getListDates && (

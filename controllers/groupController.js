@@ -1,5 +1,6 @@
-const { Group } = require("../models/models");
-const ApiError = require("../error/ApiError");
+// @ts-nocheck
+const { Group } = require('../models/models');
+const ApiError = require('../error/ApiError');
 
 class GroupController {
   async addGroup(req, res, next) {
@@ -10,7 +11,7 @@ class GroupController {
         const group = await Group.create({ name, disciplineId, moodle });
         return res.json(group);
       } else {
-        return res.json("This group already exists!!!");
+        return res.json('This group already exists!!!');
       }
     } catch (e) {
       next(ApiError.badRequest(e.message));
@@ -38,6 +39,12 @@ class GroupController {
       await Group.destroy({ where: { id } });
     });
     return res.json(listId);
+  }
+  async deleteGroupWithName(req, res) {
+    const { name } = req.query;
+    const { id } = await Group.findOne({ where: { name } });
+    await Group.destroy({ where: { id } });
+    return res.json(name);
   }
 }
 module.exports = new GroupController();
