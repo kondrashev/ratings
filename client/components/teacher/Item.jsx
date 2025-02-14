@@ -1,44 +1,47 @@
 // @ts-nocheck
-import React, { useContext, useEffect, useRef, useState } from "react";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
-import Checkbox from "@mui/material/Checkbox";
-import FolderIcon from "@mui/icons-material/Folder";
-import CreateIcon from "@mui/icons-material/Create";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import { ApplictationContext } from "../../App";
-import endpoints from "../constants/Endpoints";
-import { useDispatch } from "react-redux";
-import { updateItemFetchData } from "../../store/items/action_edit";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import { showNavigation } from "./MapperStudents";
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import Checkbox from '@mui/material/Checkbox';
+import FolderIcon from '@mui/icons-material/Folder';
+import CreateIcon from '@mui/icons-material/Create';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import { ApplictationContext } from '../../App';
+import endpoints from '../constants/Endpoints';
+import { useDispatch } from 'react-redux';
+import { updateItemFetchData } from '../../store/items/action_edit';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import { showNavigation } from './MapperStudents';
 
 const styles = {
   listItem: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    cursor: "pointer",
+    position: 'relative',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    cursor: 'pointer',
+    zIndex: '10',
   },
-  iconEdit: { marginLeft: "20px", cursor: "pointer", zIndex: 1000 },
+  iconEdit: { marginLeft: '20px', cursor: 'pointer', zIndex: 1000 },
   listItemText: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginLeft: "50px",
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginLeft: '50px',
   },
   editBlock: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 };
 const Item = (props) => {
-  const refInput = useRef("");
+  const refInput = useRef('');
   const dispatch = useDispatch();
   const [showInputEditItem, setShowInputEditItem] = useState(false);
   const { values, setValues } = useContext(ApplictationContext);
@@ -58,11 +61,9 @@ const Item = (props) => {
     setShowInputEditItem(!showInputEditItem);
   };
   const nameEditItem = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       const data = {
-        url: !values.getGroups
-          ? endpoints.updateDiscipline
-          : endpoints.updateGroup,
+        url: !values.getGroups ? endpoints.updateDiscipline : endpoints.updateGroup,
         values,
         setValues,
         id: item.id,
@@ -94,15 +95,7 @@ const Item = (props) => {
       <ListItem
         style={styles.listItemText}
         onClick={() => {
-          showNavigation(
-            values,
-            setValues,
-            suffixDisciplineURL,
-            suffixGroupURL,
-            item.name,
-            item.id,
-            item.disciplineId
-          );
+          showNavigation(values, setValues, suffixDisciplineURL, suffixGroupURL, item.name, item.id, item.disciplineId);
         }}
       >
         <ListItemAvatar>
@@ -117,19 +110,12 @@ const Item = (props) => {
           <Box sx={styles.editBlock}>
             <input
               ref={refInput}
-              value={
-                !values.getGroups ? values.nameDiscipline : values.nameGroup
-              }
+              value={!values.getGroups ? values.nameDiscipline : values.nameGroup}
               onChange={editNameItem}
-              onKeyPress={nameEditItem}
+              onKeyDown={nameEditItem}
             />
             <Box ml={2}>
-              <FormControlLabel
-                control={
-                  <Switch checked={item.moodle} onChange={editSwitchMoodle} />
-                }
-                label="Moodle"
-              />
+              <FormControlLabel control={<Switch checked={item.moodle} onChange={editSwitchMoodle} />} label="Moodle" />
             </Box>
           </Box>
         )}

@@ -1,22 +1,22 @@
 // @ts-nocheck
-import React, { useContext, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { ApplictationContext } from "../../App";
-import { useHistory } from "react-router-dom";
-import { checkUserFetchData } from "../../store/authorization/action";
-import endpoints from "../constants/Endpoints";
-import Alert from "@mui/material/Alert";
-import "@styles/AuthorizationForm.scss";
+import React, { useContext, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { ApplictationContext } from '../../App';
+import { useHistory } from 'react-router-dom';
+import { checkUserFetchData } from '../../store/authorization/action';
+import endpoints from '../constants/Endpoints';
+import Alert from '@mui/material/Alert';
+import '@styles/AuthorizationForm.scss';
 
 const AuthorizationForm = () => {
   const history = useHistory();
@@ -47,48 +47,37 @@ const AuthorizationForm = () => {
     authorizationCheck(data);
   };
   const onPressKey = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       authorization();
     }
   };
   useEffect(() => {
     switch (values.typeUser) {
-      case "ADMIN":
-        history.push("/teacher");
+      case 'ADMIN':
+        history.push('/teacher');
         break;
-      case "USER":
-        history.push("/student");
+      case 'USER':
+        history.push('/student');
         break;
       default:
-        history.push("/");
+        history.push('/');
     }
   }, [values.typeUser]);
   return (
     <Box className="formAuthorization">
-      <TextField
-        id="outlined-search"
-        disabled={values.errorForm}
-        label="Login"
-        variant="outlined"
-        className="fields"
-        onChange={handleChangeLogin}
-      />
+      <TextField id="outlined-search" disabled={values.errorForm} label="Login" variant="outlined" className="fields" onChange={handleChangeLogin} />
       <FormControl>
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
           disabled={values.errorForm}
-          type={values.showPassword ? "text" : "password"}
+          type={values.showPassword ? 'text' : 'password'}
           onChange={handleChangePassword}
           className="fields"
-          onKeyPress={onPressKey}
+          onKeyDown={onPressKey}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end">
+              <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">
                 {!values.showPassword ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>
@@ -102,7 +91,8 @@ const AuthorizationForm = () => {
         disableElevation
         className="fields"
         onClick={authorization}
-        disabled={values.errorForm ? true : false}>
+        disabled={values.errorForm ? true : false}
+      >
         <t class="container">Authorization</t>
       </Button>
       {values.errorForm && (
@@ -111,9 +101,10 @@ const AuthorizationForm = () => {
             setValues({
               ...values,
               errorForm: false,
-              errorMessage: "",
+              errorMessage: '',
             });
-          }}>
+          }}
+        >
           {values.errorMessage}
         </Alert>
       )}
